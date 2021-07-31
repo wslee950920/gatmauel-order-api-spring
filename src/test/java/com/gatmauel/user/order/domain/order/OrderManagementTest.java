@@ -1,11 +1,10 @@
 package com.gatmauel.user.order.domain.order;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -14,16 +13,11 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class OrderManagementTest {
-    @Mock
+    @MockBean
     private OrderRepository orderRepository;
 
     @Autowired
     private OrderManagement orderManagement;
-
-    @BeforeEach
-    public void setUp(){
-        this.orderManagement=new OrderManagement(orderRepository);
-    }
 
     @Test
     public void insert_order_null_failure(){

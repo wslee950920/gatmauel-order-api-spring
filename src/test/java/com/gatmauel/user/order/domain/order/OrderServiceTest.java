@@ -5,10 +5,9 @@ import com.gatmauel.user.order.domain.detail.DetailManagement;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,20 +18,14 @@ import static org.mockito.Mockito.*;
 @Slf4j
 @SpringBootTest
 public class OrderServiceTest {
-    @Mock   //Mock을 주입하면 OrderService내부의 OrderManagement를 대체한다.
+    @MockBean   //@Mock은 OrderService내부의 OrderManagement를 대체한다. 스프링 context에 자동으로 올라가지 않기 때문에 직접 주입 해주어야 한다.
     private OrderManagement orderManagement;
 
-    @Mock
+    @MockBean
     private DetailManagement detailManagement;
 
     @Autowired
     private OrderService orderService;
-
-    @BeforeEach
-    public void setUp(){
-        //Mock은 스프링 context에 올라가지 않기 때문에 직접 주입해주어야 한다.
-        this.orderService=new OrderServiceImpl(orderManagement, detailManagement);
-    }
 
     @Test
     public void make_order_null_failure(){

@@ -3,12 +3,11 @@ package com.gatmauel.user.order.domain.detail;
 import com.gatmauel.user.order.domain.food.Food;
 import com.gatmauel.user.order.domain.order.Order;
 import com.gatmauel.user.order.domain.order.OrderDTO;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +18,11 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class DetailManagementTest {
-    @Mock
+    @MockBean
     private DetailRepository detailRepository;
 
     @Autowired
     private DetailManagement detailManagement;
-
-    @BeforeEach
-    public void setUp(){
-        this.detailManagement=new DetailManagement(detailRepository);
-    }
 
     @Test
     public void insert_null_failure(){
