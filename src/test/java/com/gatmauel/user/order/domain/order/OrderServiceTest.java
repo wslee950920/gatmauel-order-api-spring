@@ -5,9 +5,10 @@ import com.gatmauel.user.order.domain.detail.DetailManagement;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,16 +17,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 @Slf4j
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class OrderServiceTest {
-    @MockBean   //@Mock은 OrderService내부의 OrderManagement를 대체한다. 스프링 context에 자동으로 올라가지 않기 때문에 직접 주입 해주어야 한다.
+    @Mock
     private OrderManagement orderManagement;
 
-    @MockBean
+    @Mock
     private DetailManagement detailManagement;
 
-    @Autowired
-    private OrderService orderService;
+    @InjectMocks
+    private OrderServiceImpl orderService;
 
     @Test
     public void make_order_null_failure(){

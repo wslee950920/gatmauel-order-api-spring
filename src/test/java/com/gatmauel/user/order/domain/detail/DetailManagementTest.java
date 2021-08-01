@@ -5,9 +5,10 @@ import com.gatmauel.user.order.domain.order.Order;
 import com.gatmauel.user.order.domain.order.OrderDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +17,12 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class DetailManagementTest {
-    @MockBean
+    @Mock
     private DetailRepository detailRepository;
 
-    @Autowired
+    @InjectMocks
     private DetailManagement detailManagement;
 
     @Test
@@ -56,14 +57,6 @@ public class DetailManagementTest {
 
     @Test
     public void insert_details_success(){
-        Detail detail=Detail.builder()
-                .id(1L)
-                .food(Food.builder().id(1L).build())
-                .order(Order.builder().id(1L).build())
-                .num(2).build();
-
-        when(detailRepository.save(any(Detail.class))).thenReturn(detail);
-
         String customer="맨유경비원";
         String phone="01020770883";
         int total=14000;
@@ -85,6 +78,14 @@ public class DetailManagementTest {
                 .request(request)
                 .address(address)
                 .details(detailDTOList).build();
+
+        Detail detail=Detail.builder()
+                .id(1L)
+                .food(Food.builder().id(1L).build())
+                .order(Order.builder().id(1L).build())
+                .num(2).build();
+
+        when(detailRepository.save(any(Detail.class))).thenReturn(detail);
 
         detailManagement.insertDetails(orderDTO);
 

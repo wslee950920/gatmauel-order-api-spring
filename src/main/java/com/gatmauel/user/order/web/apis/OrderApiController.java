@@ -25,6 +25,7 @@ public class OrderApiController {
         Map<String, Object> response=new HashMap<>();
         response.put("id", orderDTO.getId());
         response.put("customer", orderDTO.getCustomer());
+        response.put("phone", orderDTO.getPhone());
         response.put("total", orderDTO.getTotal());
         response.put("request", orderDTO.getRequest());
         response.put("address", orderDTO.getAddress());
