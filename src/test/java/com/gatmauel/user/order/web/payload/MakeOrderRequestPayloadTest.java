@@ -24,7 +24,7 @@ public class MakeOrderRequestPayloadTest {
     @BeforeEach
     public void setUp(){
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        this.validator = factory.getValidator();
+        validator = factory.getValidator();
     }
 
     @Test

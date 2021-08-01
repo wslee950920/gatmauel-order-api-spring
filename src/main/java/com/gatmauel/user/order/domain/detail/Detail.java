@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor  //delete쿼리 할 때 필요한 듯
 @ToString(exclude = {"food", "order"})
 @Getter
 @Entity

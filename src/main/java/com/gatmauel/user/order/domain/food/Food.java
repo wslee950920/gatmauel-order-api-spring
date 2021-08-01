@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "food")
 public class Food {

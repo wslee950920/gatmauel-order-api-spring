@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Getter
 @ToString
 @AllArgsConstructor
+@NoArgsConstructor  //delete쿼리 할 때 필요한 듯
 @Entity
 @Table(name = "orders")
 public class Order extends BaseEntity {
