@@ -4,7 +4,7 @@ node('master'){
     }
 
     stage('Unit test'){
-        sh './gradlew clean test --no-daemon'
+        sh './gradlew clean test'
         junit '**/build/test-results/test/*.xml'
     }
 
