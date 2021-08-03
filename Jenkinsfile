@@ -9,6 +9,7 @@ node('master'){
     }
 
     stage('Build'){
+        sh 'chmod +x gradlew'
         sh './gradlew clean build'
     }
 }
