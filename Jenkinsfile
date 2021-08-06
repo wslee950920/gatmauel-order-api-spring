@@ -1,8 +1,4 @@
 node('master'){
-    environment{
-        DOCKER_REPO=
-    }
-
     stage('Poll'){
         checkout scm
     }
@@ -14,7 +10,7 @@ node('master'){
 
     stage('Build package'){
         sh './gradlew clean build -x test --no-daemon'
-        sh "cp build/libs/order-0.0.1-SNAPSHOT.jar docker/app.jar"
+        sh 'cp build/libs/order-0.0.1-SNAPSHOT.jar docker/app.jar'
     }
 
     stage("Build Docker image"){
