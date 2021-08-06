@@ -36,6 +36,7 @@ dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	testAnnotationProcessor 'org.projectlombok:lombok'	//이거 없으면 test환경에서 롬복 로그 어노테이션 사용 불가
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 }
 
 test {
