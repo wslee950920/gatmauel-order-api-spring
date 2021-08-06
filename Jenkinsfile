@@ -14,6 +14,15 @@ node('master'){
     }
 
     stage("Build Docker image"){
-        app = docker.build("524195111135.dkr.ecr.ap-northeast-2.amazonaws.com/gatmauel-user-api-spring:${env.GIT_COMMIT}", "./docker")
+        app = docker.build("524195111135.dkr.ecr.ap-northeast-2.amazonaws.com/gatmauel-user-api-spring:${env.BUILD_ID}", "./docker")
+    }
+
+    stage("Push image"){
+        sh 'rm  ~/.dockercfg || true'
+        sh 'rm ~/.docker/config.json || true'
+
+        docker.withRegistry('https://524195111135.dkr.ecr.ap-northeast-2.amazonaws.com', 'ecr:ap-northeast-2:aws-wslee950920'){
+            app.push()
+        }
     }
 }
