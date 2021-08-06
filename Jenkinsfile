@@ -14,6 +14,6 @@ node('master'){
     }
 
     stage("Build Docker image"){
-        app = docker.build("524195111135.dkr.ecr.ap-northeast-2.amazonaws.com/gatmauel-user-api-spring")
+        app = docker.build("524195111135.dkr.ecr.ap-northeast-2.amazonaws.com/gatmauel-user-api-spring", "docker/Dockerfile")
     }
 }
