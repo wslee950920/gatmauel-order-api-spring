@@ -1,19 +1,21 @@
 package com.gatmauel.user.order;
 
+import com.amazonaws.services.sqs.model.SendMessageResult;
+import com.gatmauel.user.order.domain.common.message.AwsSqsMessageSender;
 import com.gatmauel.user.order.domain.detail.DetailDTO;
 import com.gatmauel.user.order.domain.detail.DetailRepository;
 import com.gatmauel.user.order.domain.food.Food;
 import com.gatmauel.user.order.domain.food.FoodRepository;
 import com.gatmauel.user.order.domain.order.OrderRepository;
 import com.gatmauel.user.order.utils.JsonUtils;
-import com.gatmauel.user.order.web.payload.request.MakeOrderRequestPayload;
+import com.gatmauel.user.order.web.payload.MakeOrderRequestPayload;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -23,7 +25,8 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -43,6 +46,9 @@ class OrderApplicationTests {
 	@Autowired
 	private OrderRepository orderRepository;
 
+	@MockBean
+	private AwsSqsMessageSender awsSqsMessageSender;
+
 	private MockMvc mvc;
 
 	private Food food;
@@ -51,7 +57,6 @@ class OrderApplicationTests {
 	public void setup() {
 		mvc = MockMvcBuilders
 				.webAppContextSetup(context)
-				.apply(springSecurity())
 				.addFilters(new CharacterEncodingFilter("UTF-8", true))  // 필터 추가
 				.build();
 
@@ -72,7 +77,6 @@ class OrderApplicationTests {
 	void contextLoads() {
 	}
 
-	@WithMockUser(roles = "USER")
 	@Test
 	public void request_make_order_success() throws Exception{
 		String customer="맨유경비원";
@@ -95,6 +99,8 @@ class OrderApplicationTests {
 				.request(request)
 				.address(address)
 				.details(detailDTOList).build();
+
+		when(awsSqsMessageSender.sendMessage(any(String.class))).thenReturn(any(SendMessageResult.class));
 
 		mvc.perform(
 				post("/@user/order/make")

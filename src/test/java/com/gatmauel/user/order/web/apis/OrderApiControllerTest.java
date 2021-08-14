@@ -4,14 +4,13 @@ import com.gatmauel.user.order.domain.detail.DetailDTO;
 import com.gatmauel.user.order.domain.order.OrderDTO;
 import com.gatmauel.user.order.domain.order.OrderService;
 import com.gatmauel.user.order.utils.JsonUtils;
-import com.gatmauel.user.order.web.payload.request.MakeOrderRequestPayload;
+import com.gatmauel.user.order.web.payload.MakeOrderRequestPayload;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -45,7 +44,6 @@ public class OrderApiControllerTest {
                 .build();
     }
 
-    @WithMockUser(roles = "USER")
     @Test
     public void make_order_invalid_request_payload_return_400() throws Exception{
         MakeOrderRequestPayload requestPayload=MakeOrderRequestPayload.builder().build();
@@ -57,7 +55,6 @@ public class OrderApiControllerTest {
                 .andExpect(status().is(400));
     }
 
-    @WithMockUser(roles = "USER")
     @Test
     public void make_order_valid_request_payload_return_200() throws Exception{
         String customer="맨유경비원";

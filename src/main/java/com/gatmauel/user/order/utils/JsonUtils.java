@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 public final class JsonUtils {
     public static String toJson(Object object) {
         ObjectMapper mapper = new ObjectMapper();
+
         try {
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {

@@ -2,7 +2,7 @@ package com.gatmauel.user.order.web.apis;
 
 import com.gatmauel.user.order.domain.order.OrderDTO;
 import com.gatmauel.user.order.domain.order.OrderService;
-import com.gatmauel.user.order.web.payload.request.MakeOrderRequestPayload;
+import com.gatmauel.user.order.web.payload.MakeOrderRequestPayload;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

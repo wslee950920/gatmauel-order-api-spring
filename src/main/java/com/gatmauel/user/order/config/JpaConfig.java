@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 //At least one JPA metamodel must be present!
 @Configuration
 @EnableJpaAuditing
-public class JpgConfig {
+public class JpaConfig {
 }

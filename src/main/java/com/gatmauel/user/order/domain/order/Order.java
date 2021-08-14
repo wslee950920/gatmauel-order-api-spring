@@ -1,6 +1,6 @@
 package com.gatmauel.user.order.domain.order;
 
-import com.gatmauel.user.order.domain.common.BaseEntity;
+import com.gatmauel.user.order.domain.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

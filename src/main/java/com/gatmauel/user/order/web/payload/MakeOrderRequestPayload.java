@@ -1,4 +1,4 @@
-package com.gatmauel.user.order.web.payload.request;
+package com.gatmauel.user.order.web.payload;
 
 import com.gatmauel.user.order.domain.detail.DetailDTO;
 

@@ -1,4 +1,4 @@
-package com.gatmauel.user.order.domain.common;
+package com.gatmauel.user.order.domain.common.entity;
 
 import java.time.LocalDateTime;
 

@@ -1,7 +1,9 @@
 package com.gatmauel.user.order.domain.order;
 
+import com.gatmauel.user.order.domain.common.message.AwsSqsMessageSender;
 import com.gatmauel.user.order.domain.detail.DetailDTO;
 import com.gatmauel.user.order.domain.detail.DetailManagement;
+import com.gatmauel.user.order.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
@@ -26,6 +28,9 @@ public class OrderServiceTest {
 
     @Mock
     private DetailManagement detailManagement;
+
+    @Mock
+    private AwsSqsMessageSender awsSqsMessageSender;
 
     @InjectMocks
     private OrderServiceImpl orderService;
@@ -68,6 +73,7 @@ public class OrderServiceTest {
 
         verify(orderManagement).insertOrder(orderDTO);
         verify(detailManagement).insertDetails(orderDTO);
+        verify(awsSqsMessageSender).sendMessage(JsonUtils.toJson(orderDTO));
 
         assertThat(orderDTO.getId()).isEqualTo(orderId);
         assertThat(orderDTO.getCustomer()).isEqualTo(customer);
