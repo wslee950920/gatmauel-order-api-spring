@@ -39,6 +39,7 @@ public class MakeOrderRequestPayload {
                 .customer(this.customer)
                 .phone(this.phone)
                 .total(this.total)
+                .paid(0)
                 .request(this.request)
                 .address(this.address)
                 .details(this.details).build();
